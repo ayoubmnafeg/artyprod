@@ -1,0 +1,39 @@
+
+{% extends 'core/base.html' %} {% block title %} Services {% endblock title %}
+{% block content %}
+<div class="container mx-auto px-4">
+  <h1 class="text-center text-3xl font-bold mb-10 mt-10">Our Services</h1>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white rounded shadow-md">
+      <img class="w-full h-40 object-cover rounded-t" src="images/Graphic-Charter.jpg" alt="Graphic Charter">
+      <div class="px-4 py-2">
+        <h2 class="text-lg font-bold mb-2">Graphic Charter</h2>
+        <p class="text-gray-700 leading-tight mb-4">We can design a comprehensive graphic charter that defines the style and standards for your brand. From logo design to typography to color palettes, we'll ensure that your brand is consistent and visually appealing across all channels.</p>
+        <div class="text-center">
+          <a href="#" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View Examples</a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded shadow-md">
+      <img class="w-full h-40 object-cover rounded-t" src="images/3D-Object.jpg" alt="3D Object">
+      <div class="px-4 py-2">
+        <h2 class="text-lg font-bold mb-2">3D Object</h2>
+        <p class="text-gray-700 leading-tight mb-4">We can create stunning 3D models and objects for use in advertising, product demos, and more. Our team has the expertise and tools to bring your ideas to life and make your products stand out.</p>
+        <div class="text-center">
+          <a href="#" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View Examples</a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded shadow-md">
+      <img class="w-full h-40 object-cover rounded-t" src="images/Scripting.jpg" alt="Scripting">
+      <div class="px-4 py-2">
+        <h2 class="text-lg font-bold mb-2">Scripting</h2>
+        <p class="text-gray-700 leading-tight mb-4">We offer custom scripting services for video production, animation, and more. Our team can help you develop compelling scripts that engage your audience and convey your message effectively.</p>
+        <div class="text-center">
+          <a href="#" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View Examples</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
