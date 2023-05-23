@@ -1,0 +1,77 @@
+{% extends 'core/base.html' %}
+{% block title %} SignIn {% endblock title %} 
+{% block content %}
+<div class="bg-gray-200 flex items-center justify-center h-screen">
+  <div class="max-w-md w-full mx-auto">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h2 class="text-center text-xl mb-6 font-medium">Sign Up</h2>
+      <form method='post' >
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="username">
+            username
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="username"
+            name="username"
+            type="username"
+            placeholder="Enter your username"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="Email">
+            Email
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="Email"
+            name="email"
+            type="Email"
+            placeholder="Enter your Email"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="password1">
+            Password
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password1"
+            name="password1"
+            type="Password"
+            placeholder="Enter your Password"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="password2">
+            Password again
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password2"
+            name="password2"
+            type="Password"
+            placeholder="Enter your Password again"
+          />
+        </div>
+        <div class="flex items-center justify-between">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Sign In
+          </button>
+          <a
+            class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            href="{% url 'login' %}"
+          >
+            I have an account!
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

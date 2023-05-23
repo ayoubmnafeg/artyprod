@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+{% block title %} Team {% endblock title %} 
+{% block content %}
+<div class="flex flex-wrap justify-center">
+  
+  {% for st in staff %}
+  <div class="max-w-sm rounded overflow-hidden shadow-lg m-4">
+    <img class="w-full" src="{{ st.image.url }}" alt="Team Member Photo">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">{{ st.name }}</div>
+      <p class="text-gray-700 text-base">{{ st.job_title }}</p>
+      <p class="text-gray-700 text-base">{{ st.description }}</p>
+    </div>
+    <div class="px-6 py-4">
+      <a href="{{ st.in_url }}" target="_blank" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">LinkedIn Profile</a>
+      {% if st.site_url %}
+        <a href="{{ st.site_url }}" target="_blank" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-4">Personal Site</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

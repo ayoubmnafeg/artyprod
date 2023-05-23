@@ -7,8 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>{% block title %} {% endblock title %} | artyprod</title>
   </head>
-  <body class="bg-gray-100">
+  <body class="bg-gray-200">
     {% block navbar %}{% include 'core/navbar.html' %}{% endblock navbar %}
-    {% block content %} {% endblock content %}
+    <div class="p-20">
+      {% block content %} {% endblock content %}
+    </div>
+    {% block footer %}{% include 'core/footer.html' %}{% endblock footer %}
   </body>
 </html>

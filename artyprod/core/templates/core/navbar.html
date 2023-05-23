@@ -1,3 +1,11 @@
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("user-menu");
+    const button = document.getElementById("user-menu-button");
+    menu.classList.toggle("active");
+    button.classList.toggle("active");
+  }  
+</script>
 <nav class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
@@ -9,6 +17,13 @@
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
+              <a href="/services" 
+                {% if request.path == '/services/' %}
+                    class="text-gray-300 bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+                {% else %}
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+                {% endif %}
+              >Services</a>
               <a href="/portfolio" 
                 {% if request.path == '/portfolio/' %}
                     class="text-gray-300 bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
@@ -16,28 +31,57 @@
                     class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
                 {% endif %}
               >Portfolio</a>
-              <a href="/services" 
-              {% if request.path == '/services/' %}
-                  class="text-gray-300 bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
-              {% else %}
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+              <a href="/team" 
+                {% if request.path == '/team/' %}
+                    class="text-gray-300 bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+                {% else %}
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+                {% endif %}
+              >Team</a>
+              
+              {% if request.user.is_authenticated %}
+                <a href="/contact" 
+                  {% if request.path == '/contact/' %}
+                      class="text-gray-300 bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+                  {% else %}
+                      class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+                  {% endif %}
+                >Contact</a>
               {% endif %}
-            >Services</a>
-              <a href="/contact" 
-              {% if request.path == '/contact/' %}
-                  class="text-gray-300 bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
-              {% else %}
-                  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
-              {% endif %}
-            >Contact</a>
             </div>
           </div>
         </div>
-        <!-- Buttons -->
-        <div class="absolute right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <a href="/signin"><button class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Sign In</button></a>
-            <a href="/login"><button class="ml-4 bg-gray-300 text-gray-700 px-3 py-2 rounded-md text-sm font-medium">Log In</button></a>
+        <!-- Buttons -->  
+        {% if request.path == '/login/' or request.path == '/signup/' %}
+        {% elif request.user.is_authenticated %}
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <button type="button" class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+            <span class="sr-only">View notifications</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+            </svg>
+          </button>
+          <!-- Profile dropdown -->
+          <div class="relative ml-3">
+            <div>
+              <button type="button" class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true" onclick="document.getElementById('user-menu').classList.toggle('hidden')">
+                <span class="sr-only">Open user menu</span>
+                <img class="h-8 w-8 rounded-full" src="https://scontent.ftun15-1.fna.fbcdn.net/v/t39.30808-6/345206765_180605814937265_799140971574001191_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=XOWOPf33K6QAX-zEw-F&_nc_ht=scontent.ftun15-1.fna&oh=00_AfAahSPxmVehIrrMKw0n5QFHnzMav56HRE6ICXDiH6CKlA&oe=647131D2" alt="">
+              </button>
+            </div>
+            <div id="user-menu" class="hidden open absolute right-0 z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" id="user-menu">
+              <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+              <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+              <a href="/logout" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-1">Logout</a>
+            </div>
+          </div>
         </div>
+        {% else %}
+        <div class="absolute right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <a href="/signup"><button class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">SignUp</button></a>
+          <a href="/login"><button class="ml-4 bg-gray-300 text-gray-700 px-3 py-2 rounded-md text-sm font-medium">LogIn</button></a>
+        </div>
+        {% endif %}
       </div>
     </div>
   </nav>
