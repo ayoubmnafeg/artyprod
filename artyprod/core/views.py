@@ -105,17 +105,18 @@ def profile(request):
     return render(request, 'core/profile.html', context)
 
 
+
+@login_required  # Ensure the user is logged in to access this view
 def add_project(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
-            # Set the project owner to the current user
-            project.owner = request.user
+            project.owner = request.user.client  # Assign the Client instance as the owner
             project.save()
-            form.save_m2m()  # Save the many-to-many field (tags in this case)
-            return redirect('portfolio')
+            return redirect('profile')  # Redirect to the profile page after successfully adding the project
     else:
         form = ProjectForm()
-    
-    return render(request, 'core/add_project.html', {'form': form})
+
+    context = {'form': form}
+    return render(request, 'core/add_project.html', context)
