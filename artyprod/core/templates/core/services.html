@@ -4,18 +4,17 @@
 <div class="container mx-auto px-4">
   <h1 class="text-center text-3xl font-bold mb-10 mt-10">Our Services</h1>
   <div-- class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    
     {% for serv in services %}
-    <div class="bg-white rounded shadow-md">
-      <img class="w-full h-40 object-cover rounded-t" src="{{serv.image.url}}" alt="Graphic Charter">
-      <div class="px-4 py-2">
-        <h2 class="text-lg font-bold mb-2">{{serv.type}}</h2>
-        <p class="text-gray-700 leading-tight mb-4">{{serv.description}}</p>
-        <div class="text-center">
-          <a href="#" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View Examples</a>
+      <div class="bg-white rounded shadow-md">
+        <img class="w-full h-40 object-cover rounded-t" src="{{serv.image.url}}" alt="Graphic Charter">
+        <div class="px-4 py-2">
+          <h2 class="text-lg font-bold mb-2">{{serv.type}}</h2>
+          <p class="text-gray-700 leading-tight mb-4">{{serv.description}}</p>
+          <div class="text-center">
+            <a href="/portfolio/{{serv.type}}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View Examples</a>
+          </div>
         </div>
       </div>
-    </div>
     {% endfor %}
   </div>
 </div>

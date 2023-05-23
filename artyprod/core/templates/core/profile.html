@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+<div class="flex justify-center items-center mt-8">
+    <div class="max-w-md w-full mx-auto">
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="flex justify-center items-center mb-8">
+          <div class="w-1/3">
+            {% if client.photo %}
+              <img class="rounded-full w-32 h-32" src="{{ client.photo.url }}" alt="Profile Photo">
+            {% else %}
+              <div class="rounded-full w-32 h-32 bg-gray-200"></div> <!-- Default profile photo -->
+            {% endif %}
+          </div>
+          <div class="w-2/3 ml-4 text-center">
+            <h2 class="text-xl font-medium">{{ client.user.username }}</h2>
+            <p class="text-gray-600 text-sm">{{ client.user.email }}</p>
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <a href="{% url 'add_project' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full w-full max-w-md text-center focus:outline-none focus:shadow-outline">
+            Add Project
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+
+<div class="flex justify-center mt-8">
+  <div class="flex items-center">
+    <a href="?status=P" class="mr-4 text-lg font-medium text-blue-600 {% if status == 'P' %}font-bold{% endif %}">Pending</a>
+    <a href="?status=C" class="mr-4 text-lg font-medium text-blue-600 {% if status == 'C' %}font-bold{% endif %}">Completed</a>
+    <a href="?status=IP" class="mr-4 text-lg font-medium text-blue-600 {% if status == 'IP' %}font-bold{% endif %}">In Progress</a>
+    <a href="?status=IR" class="mr-4 text-lg font-medium text-blue-600 {% if status == 'IR' %}font-bold{% endif %}">In Review</a>
+    <a href="?status=CL" class="mr-4 text-lg font-medium text-blue-600 {% if status == 'CL' %}font-bold{% endif %}">Cancelled</a>
+  </div>
+</div>
+
+<div class="flex flex-wrap justify-center mt-8">
+  {% for project in projects %}
+    {% if project.status == status %}
+      <div class="max-w-sm rounded overflow-hidden shadow-lg m-4">
+        <img class="w-full" src="{{ project.image.url }}" alt="Project Image">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">{{ project.project_name }}</div>
+          <p class="text-gray-700 text-base">{{ project.description }}</p>
+        </div>
+        <div class="px-6 py-4">
+          {% for tag in project.tags.all %}
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% empty %}
+    <p class="text-center">No projects found with the selected status.</p>
+  {% endfor %}
+</div>
+{% endblock content %}

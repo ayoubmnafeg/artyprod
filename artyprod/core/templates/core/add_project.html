@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% block title %} Add Project {% endblock title %} 
+{% block content %}
+<div class="bg-gray-200 flex items-center justify-center h-screen">
+    <div class="max-w-3xl w-full mx-auto">
+        <div class="bg-white shadow-md rounded px-8 py-6 mb-4">
+            <h2 class="text-center text-3xl mb-6 font-medium">Add Project</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="project_name">
+                        Project Name
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="project_name" type="text" name="project_name" placeholder="Enter project name">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="description">
+                        Description
+                    </label>
+                    <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" placeholder="Enter project description"></textarea>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="image">
+                        Image
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" type="file" name="image">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="tags">
+                        Tags
+                    </label>
+                    <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tags" name="tags" multiple>
+                        {% for tag in form.fields.tags.choices %}
+                            <option value="{{ tag.0 }}">{{ tag.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="service">
+                        Service
+                    </label>
+                    <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="service" name="service">
+                        {% for service in form.fields.service.choices %}
+                            <option value="{{ service.0 }}">{{ service.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="flex items-center justify-center">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Create Project
+                    </button>
+                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 ml-4" href="{% url 'portfolio' %}">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

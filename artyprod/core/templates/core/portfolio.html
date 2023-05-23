@@ -2,22 +2,21 @@
 {% block title %} Portfolio {% endblock title %} 
 {% block content %}
 <div class="flex flex-wrap justify-center">
-    <div class="max-w-sm rounded overflow-hidden shadow-lg m-4">
-      <img class="w-full" src="path/to/image.jpg" alt="Project Image">
-      <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">Project Name</div>
-        <p class="text-gray-700 text-base">Project Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-      </div>
-      <div class="px-6 py-4">
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#GraphicDesign</span>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#LogoDesign</span>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#Branding</span>
-      </div>
-      <div class="px-6 py-4">
-        <div class="text-gray-700 font-bold">Testimonial:</div>
-        <p class="text-gray-700 text-base">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor."</p>
-        <p class="text-gray-700 font-bold text-right">- Jane Doe</p>
-      </div>
-    </div>
+    {% for proj in projects %}
+      {% if proj.status == 'C' %}
+      <div class="max-w-sm rounded overflow-hidden shadow-lg m-4">
+        <img class="w-full" src="{{proj.image.url}}" alt="Project Image">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">{{ proj.project_name }}</div>
+          <p class="text-gray-700 text-base">{{ proj.description }}</p>
+        </div>
+        <div class="px-6 py-4">
+          {% for tag in proj.tags.all %}
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </div>  
+      {% endif %}  
+    {% endfor %}
 </div>  
 {% endblock content %}

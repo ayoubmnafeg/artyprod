@@ -24,10 +24,8 @@ class Client(models.Model):
     photo = models.ImageField(upload_to='media/account_pdp', blank=True, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
-    REQUIRED_FIELDS = ['email']
-    
     def __str__(self):
-        return str(self.user)
+        return self.user.username
 
 
 class Staff(models.Model):
@@ -60,7 +58,7 @@ class Project(models.Model):
     owner = models.ForeignKey(Client, on_delete=models.CASCADE)
     responsibles = models.ManyToManyField(Staff, related_name='staff')
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    status = models.CharField(max_length=2, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default='P')
     
     REQUIRED_FIELDS = ['name', 'description', 'tags']
     
